@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load i18n %} 
+
+{% block title %}Projects{% endblock %}
+
+{% block content %}
+<section>
+	<h2>{% trans "Softwares' Projects" %}</h2>
+	{% for project in projects %}
+		<article class="project">
+			<h3><a href="{{ project.url }}">{{ project.name }}</a></h3>
+			<ul>
+				<li>{% trans "Language : " %} 
+				{% for lg in project.languages.all %}
+					{{lg.value}}
+					{% if not forloop.last %}
+					|
+					{% endif %}
+				{% endfor %}
+				<li>{% trans "Activity : " %} {{project.activity.value}}</li>
+			</ul>
+			<p class="description">{{ project.description }}</p>
+		</article>
+	{% endfor %}
+</section>
+{% endblock %}
